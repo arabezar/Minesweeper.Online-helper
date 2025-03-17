@@ -1,4 +1,4 @@
-from pywinauto import Application
+from pywinauto import Application, ElementNotFoundError
 import time
 import re
 from selenium import webdriver
@@ -65,6 +65,15 @@ def authenticate(url):
         wait_server(driver)
     return driver
 
+def find_address_field_url(win):
+    edit_ctrls = win.descendants(control_type="Edit")
+    for ctrl in edit_ctrls:
+        if 'text_block' in dir(ctrl):
+            text = ctrl.text_block()
+            if text == "Поле адреса" or \
+               text.endswith(" или введите адрес"):
+                return ctrl.get_value()
+
 if __name__ == '__main__':
     app = Application(backend='uia')
     try:
@@ -73,10 +82,11 @@ if __name__ == '__main__':
         print("Откройте страницу игры перед запуском программы")
         exit(255)
 
-    # addr_ctrl = app.top_window().child_window(title="Поле адреса", control_type="Edit")
     win = app.window(title_re=r"Игра #[\d]* - Minesweeper Online")
-    addr_ctrl = win.child_window(title="Поле адреса", control_type="Edit")
-    url = addr_ctrl.get_value()
+    url = find_address_field_url(win)
+    if not url:
+        print("Не получилось найти игру, сообщите, пожалуйста, разработчику версию браузера")
+        exit(254)
 
     driver = authenticate(url)
     # driver = initBrowser(False)
