@@ -1,0 +1,15 @@
+# requests
+certifi==2024.8.30
+charset-normalizer==3.4.0
+idna==3.10
+requests==2.32.3
+urllib3==2.2.3
+
+# pillow
+pillow==11.0.0
+
+# pywinauto
+comtypes==1.4.8
+pywin32==308
+pywinauto==0.6.8
+six==1.17.0
