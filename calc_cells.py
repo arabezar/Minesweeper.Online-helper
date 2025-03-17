@@ -1,4 +1,4 @@
-from pywinauto import Application, ElementNotFoundError
+from pywinauto import Application
 import time
 import re
 from selenium import webdriver
