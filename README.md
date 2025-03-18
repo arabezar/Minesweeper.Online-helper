@@ -60,5 +60,5 @@ python <script_name>.py
 ## Вклад
 Все идеи, пожелания и замечания категорически приветствуются в разделах [Issues](https://github.com/arabezar/Minesweeper.Online-helper/issues) и [Discussions](https://github.com/arabezar/Minesweeper.Online-helper/discussions).
 
-## Поддержка
-Нравится проект? Поддержи автора [здесь](https://yoomoney.ru/to/410013875426872) или [тут](https://pay.cloudtips.ru/p/6352cb45). Купи ему :beers: или :coffee:
+---
+Поддержи автора, купив ему :beers: или :coffee: ([тынц](https://yoomoney.ru/to/410013875426872) или [тынц](https://pay.cloudtips.ru/p/6352cb45))
