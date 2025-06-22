@@ -92,9 +92,31 @@ if __name__ == '__main__':
     # driver = initBrowser(False)
     # driver.get(url)
 
-    mines_total = int(re.search(r'hd?d_top-area-num([\d])', driver.find_element(By.XPATH, "//div[@id='top_area_mines_100']").get_attribute('class')).group(1)) * 100 + \
-                  int(re.search(r'hd?d_top-area-num([\d])', driver.find_element(By.XPATH, "//div[@id='top_area_mines_10']").get_attribute('class')).group(1)) * 10 + \
-                  int(re.search(r'hd?d_top-area-num([\d])', driver.find_element(By.XPATH, "//div[@id='top_area_mines_1']").get_attribute('class')).group(1))
+    mines_100_found = driver.find_element(By.XPATH, "//div[@id='top_area_mines_100']").get_attribute('class')
+    mines_10_found = driver.find_element(By.XPATH, "//div[@id='top_area_mines_10']").get_attribute('class')
+    mines_1_found = driver.find_element(By.XPATH, "//div[@id='top_area_mines_1']").get_attribute('class')
+    if not (mines_100_found and mines_10_found and mines_1_found):
+        print("Не удалось найти элементы с количеством мин")
+        exit(253)
+
+    mines_100_num = re.search(r'hd?d_top-area-num([\d])', mines_100_found)
+    mines_10_num = re.search(r'hd?d_top-area-num([\d])', mines_10_found)
+    mines_1_num = re.search(r'hd?d_top-area-num([\d])', mines_1_found)
+    if not (mines_100_num and mines_10_num and mines_1_num):
+        print("Не удалось найти количество мин в элементах")
+        exit(252)
+
+    mines_100 = mines_100_num.group(1)
+    mines_10 = mines_10_num.group(1)
+    mines_1 = mines_1_num.group(1)
+
+    mines_100 = mines_100 if mines_100 else '0'
+    mines_10 = mines_10 if mines_10 else '0'
+    mines_1 = mines_1 if mines_1 else '0'
+
+    mines_total = int(mines_100) * 100 + \
+                  int(mines_10) * 10 + \
+                  int(mines_1)
     area = driver.find_element(By.XPATH, "//div[@id='AreaBlock']")
 
     not_hit_count = len(area.find_elements(By.XPATH, "//div[contains(@class, 'd_closed')]")) # 'hd_closed')]"))
